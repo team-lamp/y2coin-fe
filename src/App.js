@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { GlobalStyle, ThemeProvider } from '@react95/core';
+import { createGlobalStyle } from 'styled-components';
+import { ModalStateProvider } from './contexts/modalState';
+import { useSettingsState } from './contexts/settingsState';
+import Taskbar from './components/Taskbar';
+import Desktop from './components/Desktop';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const { theme, fontSize, contrastBg } = useSettingsState();
+
+	const BodyFontSizeOverride = createGlobalStyle`
+    body {
+      font-size: ${fontSize}px;
+      color: ${contrastBg === 'white' ? 'black' : 'white'} !important;
+    }
+
+    button.Frame-sc-1g3ndsf-0 {
+      color: ${contrastBg === 'white' ? 'black' : 'white'} !important;
+    }
+
+    select {
+      background-color: ${contrastBg} !important;
+    }
+  `;
+
+	return (
+		<ModalStateProvider>
+			<ThemeProvider theme={theme}>
+				<GlobalStyle />
+				<BodyFontSizeOverride />
+
+				<Desktop />
+				<Taskbar />
+			</ThemeProvider>
+		</ModalStateProvider>
+	);
 }
 
 export default App;
