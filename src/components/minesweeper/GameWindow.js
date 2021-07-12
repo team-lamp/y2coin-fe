@@ -250,6 +250,7 @@ function GameWindow({ onClose }) {
 					{row.map(tile =>
 						tile.revealed || (tile.mine && over) ? (
 							<PressedButton
+								key={`${tile.coords.x}${tile.coords.y}`}
 								onContextMenu={e => e.preventDefault()}
 								onMouseDown={handleRevealedClick(tile)}>
 								{tile.mine
@@ -264,6 +265,7 @@ function GameWindow({ onClose }) {
 							</PressedButton>
 						) : (
 							<UnpressedButton
+								key={`${tile.coords.x}${tile.coords.y}`}
 								onContextMenu={flagTile(tile)}
 								onClick={handleClick(tile)}
 								onMouseDown={handleMouseDown}>
