@@ -167,6 +167,7 @@ function GameWindow({ onClose }) {
 		if (first) {
 			revealTile(grid[first.coords.x][first.coords.y]);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [first]);
 
 	useEffect(() => {
@@ -185,6 +186,7 @@ function GameWindow({ onClose }) {
 
 	useEffect(() => {
 		resetGame();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [size, mines]);
 
 	useEffect(() => {
@@ -197,6 +199,7 @@ function GameWindow({ onClose }) {
 		if (over) {
 			clearInterval(interval);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [timer, started, over]);
 
 	return (
@@ -268,6 +271,7 @@ function GameWindow({ onClose }) {
 								key={`${tile.coords.x}${tile.coords.y}`}
 								onContextMenu={flagTile(tile)}
 								onClick={handleClick(tile)}
+								onMouseUp={handleMouseUp}
 								onMouseDown={handleMouseDown}>
 								{tile.flagged && '🚩'}
 							</UnpressedButton>

@@ -1,13 +1,9 @@
-import { useState } from 'react';
 import {
 	WindowsExplorer,
 	MystifyYourMind100,
 	Awfxex32Info,
 	Progman12,
 	Progman35,
-	Directcc1004,
-	Settings,
-	FolderFile,
 } from '@react95/icons';
 import { useModalState } from '../contexts/modalState';
 import { useSettingsState } from '../contexts/settingsState';

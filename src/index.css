@@ -1,6 +1,7 @@
-html, body {
-    height: 100%
+html,
+body {
+	height: 100%;
 }
 body {
-    background: url('./assets//spaceSpheres.png')
+	background: url('./assets//spaceSpheres.png');
 }

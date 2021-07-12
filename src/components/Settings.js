@@ -117,6 +117,7 @@ export default function Settings() {
 
 	useEffect(() => {
 		handleSetHighContrast(isHighContrast);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isHighContrast]);
 
 	return (

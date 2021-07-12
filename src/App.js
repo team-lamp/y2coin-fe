@@ -1,6 +1,5 @@
 import { GlobalStyle, ThemeProvider } from '@react95/core';
 import { createGlobalStyle } from 'styled-components';
-import { ModalStateProvider } from './contexts/modalState';
 import { useSettingsState } from './contexts/settingsState';
 import Taskbar from './components/Taskbar';
 import Desktop from './components/Desktop';
@@ -24,15 +23,12 @@ function App() {
   `;
 
 	return (
-		<ModalStateProvider>
-			<ThemeProvider theme={theme}>
-				<GlobalStyle />
-				<BodyFontSizeOverride />
-
-				<Desktop />
-				<Taskbar />
-			</ThemeProvider>
-		</ModalStateProvider>
+		<ThemeProvider theme={theme}>
+			<GlobalStyle />
+			<BodyFontSizeOverride />
+			<Desktop />
+			<Taskbar />
+		</ThemeProvider>
 	);
 }
 

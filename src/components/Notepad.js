@@ -1,19 +1,19 @@
-import { useState, useEffect } from 'react';
-import { Modal, Button, TextArea } from '@react95/core';
+import { useState, useEffect, useCallback } from 'react';
+import { Modal, TextArea } from '@react95/core';
 import { Notepad as NotepadIcon } from '@react95/icons';
 import useWindowDimensions from '../hooks/useWindowDimensions';
 import getRandomCoordinates from '../utils/getRandomCoordinates';
 
-const PrintPage = ({ text, setPrintOpen, printOpen }) => {
+const PrintPage = ({ text, handleClosePrint, printOpen }) => {
 	const getPageMargins = () => {
 		return `@page { margin: 1.5rem !important; }`;
 	};
 
 	useEffect(() => {
 		if (!printOpen) return;
-		window.addEventListener('afterprint', () => setPrintOpen(false));
+		window.addEventListener('afterprint', () => handleClosePrint());
 		window.print();
-	}, [printOpen]);
+	}, [printOpen, handleClosePrint]);
 
 	return (
 		<>
@@ -41,6 +41,8 @@ export default function Notepad({ onClose }) {
 	const [text, setText] = useState('');
 	const [printOpen, setPrintOpen] = useState(false);
 
+	const handleClosePrint = useCallback(() => setPrintOpen(false), []);
+
 	const handlePrint = () => {
 		if (!text) alert('No text');
 		else {
@@ -65,7 +67,9 @@ export default function Notepad({ onClose }) {
 					onChange={e => setText(e.target.value)}
 				/>
 			</Modal>
-			{printOpen && <PrintPage text={text} printOpen={printOpen} setPrintOpen={setPrintOpen} />}
+			{printOpen && (
+				<PrintPage text={text} printOpen={printOpen} handleClosePrint={handleClosePrint} />
+			)}
 		</>
 	);
 }
